@@ -7,17 +7,22 @@
   padding: 0 .4em 0 .6em;
 }
 
+.todo--done {
+  color: #b6bbbd;
+  text-decoration: line-through;
+}
+
 .todo:hover {
   background: #f6f7f7;
 }
 
-.todo input {
+.todo__tick {
   flex-shrink: 0;
   height: 1em;
   width: 1em;
 }
 
-.todo span {
+.todo__text {
   flex-grow: 1;
   flex-shrink: 1;
   margin-left: .6em;
@@ -26,13 +31,15 @@
   white-space: nowrap;
 }
 
-.todo--done span {
-  color: #b6bbbd;
-  text-decoration: line-through;
+.todo__timestamp {
+  color: #a0a0a0;
+  font-size: .64em;
+  margin: 0 .4em;
+  white-space: nowrap;
 }
 
-.todo button {
-  background: #d6d9da;
+.todo__delete {
+  background: #bcc0c2;
   cursor: pointer;
   flex-shrink: 0;
   font-size: .8em;
@@ -41,10 +48,10 @@
   width: 1.4em;
 }
 
-.todo:hover button {
+.todo:hover .todo__delete {
   visibility: visible;
 }
 
-.todo button:hover {
+.todo__delete:hover {
   background: #bcc0c2;
 }

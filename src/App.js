@@ -1,13 +1,32 @@
-import React, { Component } from 'react'
-import { v4 as uuid } from 'uuid'
+import React from 'react'
+import * as API from './API'
 import CreateTodo from './CreateTodo'
 import TodoList from './TodoList'
 import './App.css'
 
-class App extends Component {
+const POLL_INTERVAL = 5000
+
+class App extends React.Component {
 
   state = {
     items: [],
+  }
+
+  async componentDidMount() {
+    this.pollTimer = setTimeout(this.poll, 0)
+  }
+
+  poll = async () => {
+    const items = await API.getTodos()
+    this.setState({ items })
+    if (this.pollTimer) {
+      this.pollTimer = setTimeout(this.poll, POLL_INTERVAL)
+    }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.pollTimer)
+    this.pollTimer = undefined
   }
 
   render() {
@@ -18,37 +37,34 @@ class App extends Component {
         <TodoList
           delete={this.delete}
           items={this.state.items}
-          toggle={this.toggle}
+          setDone={this.setDone}
         />
       </div>
     )
   }
 
-  create = text => {
-    const newItem = {
-      id: uuid(),
-      text,
-    }
+  create = async (text) => {
+    const newItem = await API.createTodo({ text })
     this.setState(state => ({
       items: [newItem, ...state.items],
     }))
   }
 
   delete = id => {
+    API.deleteTodo(id)
     this.setState(state => ({
       items: state.items.filter(item => item.id !== id),
     }))
   }
 
-  toggle = id => {
+  setDone = (id, done) => {
+    this.update(id, { done })
+  }
+
+  update = async (id, data) => {
+    const updatedItem = await API.updateTodo(id, data)
     this.setState(state => ({
-      items: state.items.map(item => {
-        if (item.id !== id) return item
-        return {
-          ...item,
-          done: !item.done,
-        }
-      })
+      items: state.items.map(item => item.id === id ? updatedItem : item)
     }))
   }
 }

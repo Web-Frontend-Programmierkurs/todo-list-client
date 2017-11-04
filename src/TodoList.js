@@ -20,7 +20,7 @@ function TodoList(props) {
           <Todo
             {...todo}
             delete={() => props.delete(todo.id)}
-            toggle={() => props.toggle(todo.id)}
+            setDone={done => props.setDone(todo.id, done)}
           />
         </li>
       ))}
@@ -38,7 +38,7 @@ TodoList.propTypes = {
     done: PropTypes.bool,
     id: PropTypes.string.isRequired,
   })),
-  toggle: PropTypes.func.isRequired,
+  setDone: PropTypes.func.isRequired,
 }
 
 export default TodoList
