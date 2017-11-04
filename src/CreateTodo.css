@@ -1,0 +1,25 @@
+.create-todo {
+  border: 1px solid #b1b6b8;
+  border-radius: .12em;
+  display: flex;
+  flex-direction: row;
+  height: 2.2em;
+}
+
+.create-todo input {
+  flex-grow: 1;
+  height: 100%;
+  padding: 0 .3em;
+}
+
+.create-todo button {
+  background: #d6d9da;
+  cursor: pointer;
+  font-size: 1.6em;
+  height: 100%;
+  padding: 0 .3em;
+}
+
+.create-todo button:hover {
+  background: #bcc0c2;
+}

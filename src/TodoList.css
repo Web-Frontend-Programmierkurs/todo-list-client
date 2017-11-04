@@ -1,0 +1,18 @@
+.todo-list {
+  background: white;
+  border: 1px solid #b1b6b8;
+  list-style-type: none;
+}
+
+.todo-list--empty {
+  color: #9ba2a5;
+  padding: 1em .5em;
+}
+
+.todo-list li {
+  border-top: 1px solid #c6cacc;
+}
+
+.todo-list li:first-of-type {
+  border-top: none;
+}
